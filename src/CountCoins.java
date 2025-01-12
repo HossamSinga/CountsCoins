@@ -1,36 +1,20 @@
-import org.junit.Test;
+public class CountCoins {
 
-import static org.junit.Assert.assertEquals;
+    private static final int[] Coins = {1, 5, 10, 25};
 
-public class CountCoinsTest {
-    @Test
-    public void testZeroCents(){
-        CountCoins countCoins = new CountCoins();
-        int Ways = countCoins.countWays(0);
-        assertEquals(1,Ways);
 
+    public int countWays(int amount) {
+
+        return  countWaysRecursive(amount,0);
     }
-    @Test
-    public void testFiveCents(){
-        CountCoins countCoins = new CountCoins();
-        int Ways = countCoins.countWays(5);
-        assertEquals(2,Ways);
-
+    private int countWaysRecursive(int amount , int coinsIndex){
+        if (amount ==0){
+            return 1;
+        }
+        if(amount <0 || coinsIndex>= Coins.length)
+            return  0;
+        return countWaysRecursive(amount-Coins[coinsIndex],coinsIndex)
+                +countWaysRecursive(amount,coinsIndex+1);
     }
-    @Test
-    public void testTenCents() {
-        CountCoins countCoins = new CountCoins();
-        int Ways = countCoins.countWays(10);
-        System.out.println(Ways);
-        assertEquals(4, Ways);
-    }
-        @Test
-        public void testDollar(){
-            CountCoins countCoins = new CountCoins();
-            int Ways = countCoins.countWays(100);
-            System.out.println(Ways);
-            assertEquals(242,Ways);
 
-
-}
 }
